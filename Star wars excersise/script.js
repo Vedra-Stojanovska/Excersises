@@ -37,23 +37,23 @@ let storeDataCharacters = (value) => {
 };
 
 let showData = (data) => {
-  //need help with filtering out, dont know how i can filter out the titles i need
+  let allowed = [
+    data[0].name,
+    data[0].height,
+    data[0].mass,
+    data[0].birth_year,
+    data[0].gender,
+    data[0].films,
+  ];
+  console.log(data[0]);
   let titles = Object.keys(data[0]).filter((key) => {
-    if (
-      data[0][key] !== data[0].hair_color &&
-      data[0][key] !== data[0].skin_color &&
-      data[0][key] !== data[0].eye_color &&
-      data[0][key] !== data[0].homeworld &&
-      data[0][key] !== data[0].created &&
-      data[0][key] !== data[0].edited &&
-      data[0][key] !== data[0].url &&
-      data[0][key] !== data[0].species &&
-      data[0][key] !== data[0].vehicles &&
-      data[0][key] !== data[0].starships
-    ) {
-      return key;
+    for (let i = 0; i < allowed.length; i++) {
+      if (data[0][key] == allowed[i]) {
+        return key;
+      }
     }
   });
+  console.log(titles);
 
   let tHead = document.createElement("thead");
   let tBody = document.createElement("tbody");
