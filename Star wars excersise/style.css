@@ -1,3 +1,24 @@
 img {
   width: 100px;
 }
+div.images {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+div.tables {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}

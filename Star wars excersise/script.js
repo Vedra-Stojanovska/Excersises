@@ -1,20 +1,21 @@
 window.onload = () => {
   prevButton.style.visibility = "hidden";
   nextButton.style.visibility = "hidden";
-  nextBtnTwo.style.visibility = "hidden";
-  prevBtnTwo.style.visibility = "hidden";
 };
 let imageVader = document.getElementById("vader");
 imageVader.addEventListener("click", () => {
   nextButton.style.visibility = "visible";
 });
-let spaceship = document.getElementById("spaceship");
+
+let spaceshipTable = document.getElementById("spaceshipTable");
+let spaceshipImage = document.getElementById("spaceship");
 let nextButton = document.getElementById("nextBtn");
-let nextBtnTwo = document.getElementById("nextBtnTwo");
 let prevButton = document.getElementById("prevBtn");
 let myTable = document.getElementById("myTable");
-let prevBtnTwo = document.getElementById("prevBtnTwo");
 
+spaceshipImage.addEventListener("click", () => {
+  nextButton.style.visibility = "visible";
+});
 let storageData = {
   url: "https://swapi.dev/api/people/",
   urlSpaceship: "https://swapi.dev/api/starships/",
@@ -48,7 +49,7 @@ let showData = (data) => {
   console.log(data[0]);
   let titles = Object.keys(data[0]).filter((key) => {
     for (let i = 0; i < allowed.length; i++) {
-      if (data[0][key] == allowed[i]) {
+      if (data[0][key] === allowed[i]) {
         return key;
       }
     }
@@ -79,26 +80,65 @@ let showData = (data) => {
   tHead.appendChild(newRow);
   myTable.appendChild(tHead);
   myTable.appendChild(tBody);
+  showDataSpaceships(data);
 };
 
 let showDataSpaceships = (data) => {
+  let allowedData = [
+    data[0].name,
+    data[0].model,
+    data[0].manufacturer,
+    data[0].cost_in_credits,
+    data[0].passengers,
+    data[0].starship_class,
+  ];
   let spaceshipTitles = Object.keys(data[0]).filter((key) => {
-    if (typeof data[0][key] === "string") {
-      return key;
+    for (let i = 0; i < allowedData.length; i++) {
+      if (data[0][key] === allowedData[i] && data[0][key] !== data[0].MGLT) {
+        return key;
+      }
     }
   });
+  console.log(spaceshipTitles);
+  let tHeadSpaceship = document.createElement("thead");
+  let tBodySpaceship = document.createElement("tbody");
+  let newRowSpaceship = document.createElement("tr");
+  for (let spaceTitle of spaceshipTitles) {
+    let thSpaceship = document.createElement("th");
+    thSpaceship.innerHTML = spaceTitle;
+    newRowSpaceship.appendChild(thSpaceship);
+  }
+  for (let value of data) {
+    spaceshipTable.innerHTML = "";
+    let secondRowSpaceship = spaceshipTable.insertRow(spaceshipTable.length);
+    secondRowSpaceship.insertCell(0).innerHTML = value.name;
+    secondRowSpaceship.insertCell(1).innerHTML = value.model;
+    secondRowSpaceship.insertCell(2).innerHTML = value.manufacturer;
+    secondRowSpaceship.insertCell(3).innerHTML = value.cost_in_credits;
+    secondRowSpaceship.insertCell(4).innerHTML = value.passengers;
+    secondRowSpaceship.insertCell(5).innerHTML = value.starship_class;
+    tBodySpaceship.appendChild(secondRowSpaceship);
+  }
+
+  tHeadSpaceship.appendChild(newRowSpaceship);
+  spaceshipTable.appendChild(tHeadSpaceship);
+  spaceshipTable.appendChild(tBodySpaceship);
 };
 
 (getData = () => {
   imageVader.addEventListener("click", () => {
     returnData(storageData.url)
       .then((value) => storeDataCharacters(value))
-      .then((value) => showData(storageData.characters));
+      .then((value) => showData(storageData.characters))
+      .then((spaceshipTable.style.visibility = "hidden"))
+      .then((myTable.style.visibility = "visible"));
   });
-  spaceship.addEventListener("click", () => {
+  spaceshipImage.addEventListener("click", () => {
     returnData(storageData.urlSpaceship)
       .then((value) => storeDataCharacters(value))
-      .then((value) => showDataSpaceships(storageData.characters));
+      .then((value) => showData(storageData.characters))
+      .then((myTable.style.visibility = "hidden"))
+      .then((spaceshipTable.style.visibility = "visible"));
   });
   nextButton.addEventListener("click", () => {
     returnData(storageData.next)
@@ -109,10 +149,6 @@ let showDataSpaceships = (data) => {
   prevButton.addEventListener("click", () => {
     returnData(storageData.previous)
       .then((value) => storeDataCharacters(value))
-      .then((value) => showData(storageData.characters))
-      .catch(
-        (value) => console.log(value),
-        (nextButton.style.visibility = "hidden")
-      );
+      .then((value) => showData(storageData.characters));
   });
 })();
