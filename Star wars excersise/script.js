@@ -83,6 +83,8 @@ let titleCharacters = (data) => {
   //calling the filter out function
   filterOut(allowedData, data, myTable);
 };
+
+//function to create a table for the values
 let createTable = (
   table,
   valueOne,
@@ -101,7 +103,6 @@ let createTable = (
   row.insertCell(5).innerHTML = valueSix;
 };
 
-let sortedValues = null;
 //create a table for the characters
 let showValue = (value) => {
   //calling the function with the array to show our titles in the table as headers
