@@ -11,7 +11,6 @@ let spaceshipImage = document.getElementById("spaceship");
 let nextButton = document.getElementById("nextBtn");
 let prevButton = document.getElementById("prevBtn");
 let myTable = document.getElementById("myTable");
-let sortMovies = document.getElementById("height");
 
 //object to store our data from the api
 let storageData = {
@@ -84,20 +83,40 @@ let titleCharacters = (data) => {
   //calling the filter out function
   filterOut(allowedData, data, myTable);
 };
+let createTable = (
+  table,
+  valueOne,
+  valueTwo,
+  valueThree,
+  valueFour,
+  valueFive,
+  valueSix
+) => {
+  let row = table.insertRow(table.length);
+  row.insertCell(0).innerHTML = valueOne;
+  row.insertCell(1).innerHTML = valueTwo;
+  row.insertCell(2).innerHTML = valueThree;
+  row.insertCell(3).innerHTML = valueFour;
+  row.insertCell(4).innerHTML = valueFive;
+  row.insertCell(5).innerHTML = valueSix;
+};
 
+let sortedValues = null;
 //create a table for the characters
 let showValue = (value) => {
   //calling the function with the array to show our titles in the table as headers
   titleCharacters(storageData.data);
   //for each element from the value display it in a table
   value.forEach((element) => {
-    let row = myTable.insertRow(myTable.length);
-    row.insertCell(0).innerHTML = element.name;
-    row.insertCell(1).innerHTML = element.height;
-    row.insertCell(2).innerHTML = element.mass;
-    row.insertCell(3).innerHTML = element.birth_year;
-    row.insertCell(4).innerHTML = element.gender;
-    row.insertCell(5).innerHTML = element.films.length;
+    createTable(
+      myTable,
+      element.name,
+      element.height,
+      element.mass,
+      element.birth_year,
+      element.gender,
+      element.films.length
+    );
   });
   //calling the function to also create the spaceships table so that the next/previuous button can sync with one function
   showValueShips(storageData.data);
@@ -109,13 +128,15 @@ let showValueShips = (value) => {
   titleSpaceship(storageData.data);
   //for each element from the value display it in a table
   value.forEach((element) => {
-    let row = spaceshipTable.insertRow(spaceshipTable.length);
-    row.insertCell(0).innerHTML = element.name;
-    row.insertCell(1).innerHTML = element.model;
-    row.insertCell(2).innerHTML = element.manufacturer;
-    row.insertCell(3).innerHTML = element.cost_in_credits;
-    row.insertCell(4).innerHTML = element.passengers;
-    row.insertCell(5).innerHTML = element.starship_class;
+    createTable(
+      spaceshipTable,
+      element.name,
+      element.model,
+      element.manufacturer,
+      element.cost_in_credits,
+      element.passengers,
+      element.starship_class
+    );
   });
 };
 
@@ -148,13 +169,19 @@ let controlVisibility = (next, tableOne, tableTwo) => {
     returnData(storageData.next)
       .then((value) => storeData(value))
       .then((value) => showValue(storageData.data))
-      .then((prevButton.style.visibility = "visible"));
+      .then((prevButton.style.visibility = "visible"))
+      .catch((error) => {
+        alert("You are at the end");
+      });
   });
   prevButton.addEventListener("click", () => {
     myTable.innerHTML = "";
     spaceshipTable.innerHTML = "";
     returnData(storageData.previous)
       .then((value) => storeData(value))
-      .then((value) => showValue(storageData.data));
+      .then((value) => showValue(storageData.data))
+      .catch((error) => {
+        alert("You are at the beginning");
+      });
   });
 })();
