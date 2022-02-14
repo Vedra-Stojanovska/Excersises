@@ -1,5 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+body {
+  margin: 0;
+  height: 110vh;
+  background-image: url("https://source.unsplash.com/1600x900/?darthvader");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 120%;
+  font-family: "Montserrat", sans-serif;
+}
 img {
-  width: 100px;
+  width: 150px;
+  border-radius: 50%;
+  margin-top: 2em;
 }
 div.images {
   display: flex;
@@ -7,18 +20,75 @@ div.images {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 1em;
 }
 div.tables {
   display: flex;
-  flex-direction: row;
   align-items: center;
   align-content: center;
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 1em;
+  flex-direction: row;
 }
 .buttons {
   display: flex;
   justify-content: center;
   gap: 1em;
+}
+
+#myTable {
+  background-color: #000000d0;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  width: 20%;
+}
+#spaceshipTable {
+  background-color: #000000d0;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  width: 60%;
+}
+th {
+  border: none;
+  text-transform: capitalize;
+}
+td {
+  text-align: center;
+  border: none;
+}
+
+button {
+  background-color: #729b79;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button:hover {
+  background-color: #bacdb0;
+  color: #333;
 }
