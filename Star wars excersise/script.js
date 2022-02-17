@@ -11,6 +11,8 @@ let spaceshipImage = document.getElementById("spaceship");
 let nextButton = document.getElementById("nextBtn");
 let prevButton = document.getElementById("prevBtn");
 let myTable = document.getElementById("myTable");
+let searchInput = document.getElementById("search");
+let searchBtn = document.getElementById("searchBtn");
 
 //object to store our data from the api
 let storageData = {
@@ -121,6 +123,23 @@ let showValue = (value) => {
   });
   //calling the function to also create the spaceships table so that the next/previuous button can sync with one function
   showValueShips(storageData.data);
+  searchBtn.addEventListener("click", () => {
+    myTable.innerHTML = "";
+    value.forEach((element) => {
+      if (searchInput.value == element.name) {
+        titleCharacters(storageData.data);
+        createTable(
+          myTable,
+          element.name,
+          element.height,
+          element.mass,
+          element.birth_year,
+          element.gender,
+          element.films.length
+        );
+      }
+    });
+  });
 };
 
 //function to create the spaceships table
@@ -138,6 +157,23 @@ let showValueShips = (value) => {
       element.passengers,
       element.starship_class
     );
+  });
+  searchBtn.addEventListener("click", () => {
+    spaceshipTable.innerHTML = "";
+    value.forEach((element) => {
+      if (searchInput.value == element.name) {
+        titleSpaceship(storageData.data);
+        createTable(
+          spaceshipTable,
+          element.name,
+          element.model,
+          element.manufacturer,
+          element.cost_in_credits,
+          element.passengers,
+          element.starship_class
+        );
+      }
+    });
   });
 };
 

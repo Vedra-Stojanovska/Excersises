@@ -92,3 +92,15 @@ button:hover {
   background-color: #bacdb0;
   color: #333;
 }
+
+#search {
+  border-radius: 50px;
+  border: none;
+  height: 40px;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: #7c7c7c9b;
+  padding: 0.5em 1em;
+  color: white;
+  font-size: 90%;
+}
