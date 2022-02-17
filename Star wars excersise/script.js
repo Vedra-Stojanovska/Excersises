@@ -123,6 +123,7 @@ let showValue = (value) => {
   });
   //calling the function to also create the spaceships table so that the next/previuous button can sync with one function
   showValueShips(storageData.data);
+  //results from the search input
   searchBtn.addEventListener("click", () => {
     myTable.innerHTML = "";
     value.forEach((element) => {
@@ -158,6 +159,7 @@ let showValueShips = (value) => {
       element.starship_class
     );
   });
+  //results from the search input
   searchBtn.addEventListener("click", () => {
     spaceshipTable.innerHTML = "";
     value.forEach((element) => {
@@ -174,6 +176,7 @@ let showValueShips = (value) => {
         );
       }
     });
+    showSearchInput(value, createTable);
   });
 };
 
