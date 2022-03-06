@@ -159,9 +159,6 @@ class ShipDetails extends Spaceship {
 }
 //table class for refactoring the data
 class Table {
-  constructor(value) {
-    this.value = value;
-  }
   static format(response) {
     return Math.round(parseInt(response * 100) / 100)
       .toLocaleString("en")
