@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
 body {
   margin: 0;
-  height: 110vh;
-  background-image: url("https://source.unsplash.com/1600x900/?darthvader");
+  height: 115vh;
+  background-image: url("https://i.pinimg.com/originals/d7/a6/11/d7a61190a836bdcfc62bf97af4f4c74b.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -10,9 +10,10 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 img {
-  width: 150px;
-  border-radius: 50%;
+  width: 160px;
+  border-radius: 100px;
   margin-top: 2em;
+  height: 160px;
 }
 div.images {
   display: flex;
@@ -27,7 +28,7 @@ div.tables {
   align-items: center;
   align-content: center;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 1em;
   flex-direction: row;
 }
@@ -39,17 +40,18 @@ div.tables {
 
 #myTable {
   background-color: #000000d0;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  width: 20%;
-}
-#spaceshipTable {
-  background-color: #000000d0;
-  color: #fff;
+  color: #fffd74;
   border: none;
   border-radius: 20px;
   width: 60%;
+  margin-top: 2em;
+}
+#spaceshipTable {
+  background-color: #000000d0;
+  color: #fffd74;
+  border: none;
+  border-radius: 20px;
+  width: 80%;
 }
 th {
   border: none;
@@ -58,18 +60,18 @@ th {
 td {
   text-align: center;
   border: none;
+  cursor: pointer;
 }
 
 button {
-  background-color: #729b79;
+  background-color: #7c7c7c9b;
   border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
-  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  font-family: inherit;
   font-size: 14px;
   font-weight: 500;
   height: 40px;
@@ -84,7 +86,6 @@ button {
   transition: color 100ms;
   vertical-align: baseline;
   user-select: none;
-  -webkit-user-select: none;
   touch-action: manipulation;
 }
 
@@ -103,4 +104,23 @@ button:hover {
   padding: 0.5em 1em;
   color: white;
   font-size: 90%;
+}
+
+#list {
+  width: 20%;
+  border-radius: 20px;
+  color: #fffd74;
+  list-style: none;
+  margin-top: 2em;
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  align-items: center;
+  background-color: #000000d0;
+}
+p {
+  color: #fffd74;
+  font-size: 0.7em;
 }
