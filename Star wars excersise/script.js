@@ -66,7 +66,9 @@ class Character {
       let data = await returnData(value.homeworld);
       let planet = Planet.create(data);
       list.innerHTML = "";
-      list.innerHTML += `<li>Name: ${planet.name}</li>
+      list.innerHTML += `
+      <p>Homeworld of ${value.name}</p>
+      <li>Name: ${planet.name}</li>
         <li>Rotation Period: ${planet.rotationPeriod}</li>
         <li>Diameter: ${planet.diameter}</li>
         <li>Climate: ${planet.climate}</li>
