@@ -29,8 +29,8 @@ let storeData = (value) => {
 class Character {
   constructor({ name, height, mass, gender, birth_year, homeworld, films }) {
     this.name = name;
-    this.height = Table.height(height);
-    this.mass = Table.kg(mass);
+    this.setHeight(height);
+    this.setMass(mass);
     this.gender = gender;
     this.birthYear = birth_year;
     this.homeworld = homeworld;
@@ -38,6 +38,18 @@ class Character {
   }
   static create(response) {
     return new Character(response);
+  }
+  getHeight() {
+    return this.height;
+  }
+  setHeight(height) {
+    return (this.height = Table.height(height));
+  }
+  getMass() {
+    return this.mass;
+  }
+  setMass(mass) {
+    return (this.mass = Table.kg(mass));
   }
   createTable(table) {
     let row = table.insertRow(table.length);
@@ -118,13 +130,25 @@ class ShipDetails extends Spaceship {
     this.name = name;
     this.model = model;
     this.manufacturer = manufacturer;
-    this.costInCredits = Table.format(cost_in_credits);
-    this.cargoCapacity = Table.format(cargo_capacity);
+    this.setCost(cost_in_credits);
+    this.setCargo(cargo_capacity);
     this.peopleCapacity = passengers;
     this.spaceshipClass = starship_class;
   }
   static create(response) {
     return new ShipDetails(response);
+  }
+  getCost() {
+    return this.cost_in_credits;
+  }
+  setCost(cost) {
+    return (this.cost_in_credits = Table.format(cost));
+  }
+  getCargo() {
+    return this.cargo_capacity;
+  }
+  setCargo(cargo) {
+    return (this.cargo_capacity = Table.format(cargo));
   }
   createTable(table) {
     let row = table.insertRow(table.length);
@@ -163,7 +187,7 @@ class Table {
     return `${response} cm`;
   }
   static replaceCamelCase(response) {
-    return response.replace(/([a-z0-9])([A-Z])/g, "$1 $2");
+    return response.replace(/([a-z0-9])([A-Z])/g, "$1 $2").replace(/_/g, " ");
   }
 }
 
@@ -177,12 +201,14 @@ let getDataPeople = async (url) => {
   storeData(valuesPeople);
   let characters = storageData.data.map((value) => Character.create(value));
   myTable.innerHTML = "";
+  //add titles
   let titles = Object.keys(characters[0]);
   titles.forEach((title) => {
     let th = document.createElement("th");
     th.innerHTML = Table.replaceCamelCase(title);
     myTable.appendChild(th);
   });
+  //create the table
   characters.forEach((character) => character.createTable(myTable));
 };
 //function to display the spaceships
@@ -191,12 +217,14 @@ let getDataSpaceships = async (url) => {
   storeData(valuesSpaceships);
   let spaceships = storageData.data.map((value) => ShipDetails.create(value));
   spaceshipTable.innerHTML = "";
+  //add titles
   let titles = Object.keys(spaceships[0]);
   titles.forEach((title) => {
     let th = document.createElement("th");
     th.innerHTML = Table.replaceCamelCase(title);
     spaceshipTable.appendChild(th);
   });
+  //create table
   spaceships.forEach((spaceship) => {
     spaceship.createTable(spaceshipTable);
   });
